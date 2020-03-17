@@ -34,18 +34,19 @@ public class TimeEntryController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<TimeEntry> read(@PathVariable Long timeEntryId) {
-        TimeEntry timeEntry = timeEntryRepository.find(timeEntryId);
+    public ResponseEntity<TimeEntry> read(@PathVariable Long id) {
+        TimeEntry timeEntry = timeEntryRepository.find(id);
         if (timeEntry != null) {
             return new ResponseEntity<>(timeEntry, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping
     public ResponseEntity<List<TimeEntry>> list() {
-        List<TimeEntry> timeEntries = timeEntryRepository.list();
-        return new ResponseEntity(timeEntries, HttpStatus.OK);
+
+        return new ResponseEntity(timeEntryRepository.list(), HttpStatus.OK);
     }
 
     @PutMapping("{id}")
