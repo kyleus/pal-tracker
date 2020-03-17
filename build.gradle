@@ -1,10 +1,17 @@
 import org.flywaydb.gradle.task.FlywayMigrateTask
 
+// Following required to run flyway 5.2.1 plugin
+buildscript {
+    dependencies {
+        classpath 'mysql:mysql-connector-java:8.0.13'
+    }
+}
+
 plugins {
-    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
-    id 'java'
-    id 'org.flywaydb.flyway' version '6.0.1'
     id 'org.springframework.boot' version '2.2.2.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id "org.flywaydb.flyway" version "6.2.3"
+    id 'java'
 }
 
 repositories {
@@ -15,7 +22,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation 'mysql:mysql-connector-java'
-    compile group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.2.33'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
